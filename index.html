@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AutoPrima Showroom - katalog mobil baru dengan garansi resmi, promo menarik, dan booking test drive online.">
+  <title>AutoPrima Showroom | Katalog Mobil Baru</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#beranda" class="brand" aria-label="AutoPrima Showroom">
+        <span class="brand-mark">A</span>
+        <span class="brand-text">AUTO<b>PRIMA</b></span>
+      </a>
+
+      <nav class="nav-menu" id="navMenu" aria-label="Navigasi utama">
+        <a href="#beranda">Beranda</a>
+        <a href="#katalog">Katalog</a>
+        <a href="#keunggulan">Keunggulan</a>
+        <a href="#test-drive">Test Drive</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="fav-btn" id="openFavs" type="button" aria-label="Buka daftar favorit">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.1C.9 8.7 2.6 5 6.1 5c2 0 3.3 1 3.9 2 .6-1 1.9-2 3.9-2 3.5 0 5.2 3.7 3.7 6.9C19.5 16.4 12 21 12 21z" fill="currentColor"/></svg>
+          <span>Favorit</span>
+          <span class="badge-count" id="favCount">0</span>
+        </button>
+        <a href="#katalog" class="btn btn-primary btn-sm nav-cta">Cari Mobil</a>
+        <button class="hamburger" id="hamburger" type="button" aria-label="Buka menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="beranda">
+      <div class="container hero-inner">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">Dealer Mobil Baru Resmi</span>
+          <h1>Temukan Mobil Baru <span class="grad">Pilihan Terbaikmu</span></h1>
+          <p>Unit 0 KM, garansi resmi pabrikan, promo menarik, dan proses pemesanan yang transparan. Semua dalam satu showroom digital.</p>
+          <div class="hero-cta">
+            <a href="#katalog" class="btn btn-primary">Jelajahi Katalog</a>
+            <a href="#test-drive" class="btn btn-ghost">Booking Test Drive</a>
+          </div>
+          <ul class="hero-stats" id="heroStats">
+            <li><strong id="statTotal">-</strong><span>Unit Katalog</span></li>
+            <li><strong id="statAvail">-</strong><span>Siap Kirim</span></li>
+            <li><strong id="statBrand">-</strong><span>Merek</span></li>
+          </ul>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="hero-img-wrap">
+            <img id="heroImg" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=80" alt="Mobil unggulan showroom">
+          </div>
+          <button class="featured-card" id="featuredCard" type="button" disabled>
+            <span class="featured-label">Unit Unggulan</span>
+            <strong id="featuredName">Memuat data...</strong>
+            <span class="featured-price" id="featuredPrice"></span>
+            <span class="featured-go">Lihat Detail &rarr;</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ KATALOG ============ -->
+    <section class="section" id="katalog">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow dark">Katalog</span>
+          <h2>Katalog Mobil Baru</h2>
+          <p>Pilih unit favoritmu, bandingkan harga, dan simulasikan cicilan dalam satu halaman.</p>
+        </div>
+
+        <div class="toolbar reveal">
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M10 4a6 6 0 104.5 10l5 5 1.5-1.5-5-5A6 6 0 0010 4zm0 2a4 4 0 110 8 4 4 0 010-8z" fill="currentColor"/></svg>
+            <input type="search" id="searchInput" placeholder="Cari nama atau merek mobil..." aria-label="Cari mobil" autocomplete="off">
+          </div>
+          <label class="select-wrap">
+            <span>Merek</span>
+            <select id="brandSelect"><option value="Semua">Semua Merek</option></select>
+          </label>
+          <label class="select-wrap">
+            <span>Urutkan</span>
+            <select id="sortSelect">
+              <option value="default">Terbaru</option>
+              <option value="price-asc">Harga Terendah</option>
+              <option value="price-desc">Harga Tertinggi</option>
+              <option value="name-asc">Nama A - Z</option>
+              <option value="year-desc">Tahun Terbaru</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="chips reveal" id="fuelChips" role="group" aria-label="Filter bahan bakar">
+          <button class="chip active" type="button" data-fuel="Semua">Semua</button>
+        </div>
+
+        <p class="result-info" id="resultInfo" aria-live="polite">Memuat data mobil...</p>
+
+        <div class="car-grid" id="carGrid"></div>
+
+        <div class="state-box" id="stateBox" hidden></div>
+      </div>
+    </section>
+
+    <!-- ============ KEUNGGULAN ============ -->
+    <section class="section section-alt" id="keunggulan">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow dark">Keunggulan</span>
+          <h2>Kenapa Memilih AutoPrima?</h2>
+          <p>Layanan pembelian mobil baru yang nyaman, jelas, dan terpercaya.</p>
+        </div>
+        <div class="features">
+          <article class="feature reveal">
+            <div class="f-icon">&#128737;</div>
+            <h3>Garansi Resmi</h3>
+            <p>Perlindungan garansi pabrikan hingga 5 tahun langsung dari agen pemegang merek.</p>
+          </article>
+          <article class="feature reveal">
+            <div class="f-icon">&#10024;</div>
+            <h3>100% Unit Baru</h3>
+            <p>Mobil 0 KM lengkap dengan dokumen resmi dan siap jalan.</p>
+          </article>
+          <article class="feature reveal">
+            <div class="f-icon">&#128295;</div>
+            <h3>Free Service</h3>
+            <p>Gratis servis berkala dan oli di bengkel resmi sesuai ketentuan promo.</p>
+          </article>
+          <article class="feature reveal">
+            <div class="f-icon">&#128179;</div>
+            <h3>Cicilan Ringan</h3>
+            <p>Skema DP fleksibel dan tenor hingga 5 tahun dengan bunga kompetitif.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TEST DRIVE CTA ============ -->
+    <section class="cta" id="test-drive">
+      <div class="container cta-inner reveal">
+        <div>
+          <span class="eyebrow">Test Drive</span>
+          <h2>Rasakan Langsung Sensasi Berkendaranya</h2>
+          <p>Jadwalkan sesi uji kendara gratis di showroom, atau kami antar unit ke rumah Anda.</p>
+        </div>
+        <button class="btn btn-light" id="openBooking" type="button">Jadwalkan Sekarang</button>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section" id="faq">
+      <div class="container narrow">
+        <div class="section-head reveal">
+          <span class="eyebrow dark">FAQ</span>
+          <h2>Pertanyaan Umum</h2>
+          <p>Hal-hal yang paling sering ditanyakan calon pembeli.</p>
+        </div>
+        <div class="faq reveal">
+          <details>
+            <summary>Apakah semua mobil dalam kondisi baru?</summary>
+            <p>Ya. Seluruh unit adalah mobil baru 0 KM dari dealer resmi dengan garansi pabrikan.</p>
+          </details>
+          <details>
+            <summary>Apakah bisa tukar tambah mobil lama?</summary>
+            <p>Bisa. Mobil lama Anda dapat dinilai dan dijadikan uang muka pembelian unit baru.</p>
+          </details>
+          <details>
+            <summary>Dokumen apa yang dibutuhkan untuk kredit?</summary>
+            <p>KTP pemohon dan pasangan, Kartu Keluarga, NPWP, bukti penghasilan, dan rekening koran 3 bulan terakhir.</p>
+          </details>
+          <details>
+            <summary>Berapa lama pengurusan STNK dan plat nomor?</summary>
+            <p>Umumnya sekitar 14 hari kerja sejak unit diterima.</p>
+          </details>
+          <details>
+            <summary>Apakah Home Test Drive berbayar?</summary>
+            <p>Tidak. Layanan Home Test Drive gratis untuk area operasional kami.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="#beranda" class="brand light">
+          <span class="brand-mark">A</span>
+          <span class="brand-text">AUTO<b>PRIMA</b></span>
+        </a>
+        <p class="footer-about">Showroom mobil baru terpercaya dengan garansi resmi dan layanan purna jual terbaik.</p>
+      </div>
+      <div>
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="#beranda">Beranda</a></li>
+          <li><a href="#katalog">Katalog</a></li>
+          <li><a href="#keunggulan">Keunggulan</a></li>
+          <li><a href="#test-drive">Test Drive</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontak</h4>
+        <ul>
+          <li>Jl. Contoh Raya No. 1, Semarang</li>
+          <li>(024) 1234-5678</li>
+          <li>+62 812-0000-0000</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Jam Operasional</h4>
+        <ul>
+          <li>Senin - Jumat: 08.00 - 18.00</li>
+          <li>Sabtu - Minggu: 09.00 - 15.00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">&copy; 2026 AutoPrima Showroom. Tugas Akhir BTNG Frontend.</div>
+    </div>
+  </footer>
+
+  <!-- ============ MODAL: DETAIL ============ -->
+  <dialog class="modal modal-lg" id="detailModal" aria-labelledby="dName">
+    <button class="modal-close" type="button" data-close aria-label="Tutup">&times;</button>
+    <div class="detail">
+      <div class="detail-media">
+        <img id="dImg" src="" alt="">
+        <span class="status-pill" id="dStatus"></span>
+      </div>
+      <div class="detail-body">
+        <span class="detail-brand" id="dBrand"></span>
+        <h3 id="dName"></h3>
+        <p class="detail-price" id="dPrice"></p>
+
+        <dl class="spec-grid">
+          <div><dt>Tahun</dt><dd id="dYear"></dd></div>
+          <div><dt>Transmisi</dt><dd id="dTrans"></dd></div>
+          <div><dt>Bahan Bakar</dt><dd id="dFuel"></dd></div>
+          <div><dt>Status</dt><dd id="dStatusText"></dd></div>
+        </dl>
+
+        <div class="sim">
+          <h4>Simulasi Cicilan</h4>
+          <div class="sim-row">
+            <label for="dpRange">Uang Muka: <b id="dpLabel">20%</b></label>
+            <input type="range" id="dpRange" min="10" max="50" step="5" value="20">
+          </div>
+          <div class="sim-row">
+            <label for="tenorSelect">Tenor</label>
+            <select id="tenorSelect">
+              <option value="1">1 tahun</option>
+              <option value="2">2 tahun</option>
+              <option value="3">3 tahun</option>
+              <option value="4" selected>4 tahun</option>
+              <option value="5">5 tahun</option>
+            </select>
+          </div>
+          <div class="sim-result">
+            <div><span>Uang Muka</span><strong id="simDp">-</strong></div>
+            <div><span>Cicilan / bulan</span><strong id="simMonthly">-</strong></div>
+          </div>
+          <small>*Estimasi dengan bunga flat 5% per tahun. Nilai sebenarnya mengikuti kebijakan leasing.</small>
+        </div>
+
+        <div class="detail-actions">
+          <button class="btn btn-primary" id="dBook" type="button">Booking Test Drive</button>
+          <button class="btn btn-outline" id="dFav" type="button">Tambah Favorit</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ============ MODAL: FAVORIT ============ -->
+  <dialog class="modal" id="favModal" aria-labelledby="favTitle">
+    <button class="modal-close" type="button" data-close aria-label="Tutup">&times;</button>
+    <div class="modal-pad">
+      <h3 id="favTitle">Mobil Favorit Saya</h3>
+      <p class="muted">Daftar mobil yang kamu simpan. Tersimpan di browser ini.</p>
+      <div class="fav-list" id="favList"></div>
+    </div>
+  </dialog>
+
+  <!-- ============ MODAL: BOOKING ============ -->
+  <dialog class="modal" id="bookModal" aria-labelledby="bookTitle">
+    <button class="modal-close" type="button" data-close aria-label="Tutup">&times;</button>
+    <div class="modal-pad">
+      <form id="bookForm" novalidate>
+        <h3 id="bookTitle">Booking Test Drive</h3>
+        <p class="muted">Isi formulir singkat untuk menjadwalkan sesi uji kendara.</p>
+
+        <div class="field">
+          <label for="bCar">Mobil Pilihan</label>
+          <select id="bCar" required></select>
+        </div>
+        <div class="field">
+          <label for="bName">Nama Lengkap</label>
+          <input type="text" id="bName" placeholder="Contoh: Budi Santoso" required>
+          <small class="err" data-err="bName"></small>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="bPhone">Nomor WhatsApp</label>
+            <input type="tel" id="bPhone" placeholder="08xxxxxxxxxx" inputmode="numeric" required>
+            <small class="err" data-err="bPhone"></small>
+          </div>
+          <div class="field">
+            <label for="bDate">Tanggal</label>
+            <input type="date" id="bDate" required>
+            <small class="err" data-err="bDate"></small>
+          </div>
+        </div>
+        <div class="field">
+          <span class="label-like">Lokasi</span>
+          <div class="radio-row">
+            <label class="radio"><input type="radio" name="bPlace" value="Showroom" checked> Datang ke Showroom</label>
+            <label class="radio"><input type="radio" name="bPlace" value="Rumah"> Diantar ke Rumah</label>
+          </div>
+        </div>
+        <div class="field" id="addrField" hidden>
+          <label for="bAddr">Alamat Lengkap</label>
+          <textarea id="bAddr" rows="2" placeholder="Alamat rumah Anda"></textarea>
+          <small class="err" data-err="bAddr"></small>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Konfirmasi Jadwal</button>
+      </form>
+
+      <div class="success" id="bookSuccess" hidden>
+        <div class="success-icon">&#10003;</div>
+        <h3>Jadwal Terkirim!</h3>
+        <p id="successText"></p>
+        <button class="btn btn-outline" type="button" data-close>Tutup</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
