@@ -8,7 +8,7 @@
 
 /* ---------- 1. Konfigurasi ---------- */
 const API_URL = "https://api-web.dnccudinus.org/api/mobil";
-const FAV_KEY = "autoprima_favorites";
+const FAV_KEY = "anjani prima_favorites";
 const FALLBACK_IMG =
   "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80";
 
